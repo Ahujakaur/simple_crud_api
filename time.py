@@ -4,11 +4,11 @@ import os
 #create instance of Flask app
 app = Flask(__name__)
 
-#decorator 
+
 @app.route("/")
 def hello():
     #it is a good idea to include information on how to use your API on the home route
-    text = '''go to /all to see all events
+    text = '''go to /all to see all products
               and /year/<year> to see events for a particular year'''
     return render_template('index.html', html_page_text=text)
   
@@ -27,10 +27,10 @@ def all():
 def add_year(year):
     json_url = os.path.join("data","data.json")
     data_json = json.load(open(json_url))
-    data = data_json["events"]
+    data = data_json["products"]
     if request.method == 'GET':
         data_json = json.load(open(json_url))
-        data = data_json['events']
+        data = data_json['products']
         year = request.view_args['year']
         output_data = [x for x in data if x['year']==year]
         
